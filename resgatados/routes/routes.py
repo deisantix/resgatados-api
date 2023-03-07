@@ -1,5 +1,4 @@
 from ..config.api import api
+from resgatados.controllers.usuario import Usuario
 
-from ..controllers.hello_world import HelloWorld
-
-api.add_resource(HelloWorld, '/')
+api.add_resource(Usuario, '/usuario')
