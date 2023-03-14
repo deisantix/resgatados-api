@@ -18,7 +18,6 @@ class Usuarios(Resource):
         
         return usuarios_json
     
-    
     def post(self):
         try:
             req = request.get_json()
@@ -42,4 +41,27 @@ class Usuarios(Resource):
             return { "erro": f"Falta parâmetro obrigatório {str(ke)}" }, 400
         except exc.IntegrityError:
             return { "erro": "Usuário já incluso" }, 400
+    
+    def put(self):
+        req = request.get_json()
+        
+        try:
+            usuario = db.session.execute(
+                sql.select(UsuarioModel).where(UsuarioModel.cpf.__eq__(req['cpf']))    
+            ).scalar()
+            usuario.get_json() # apenas para jogar erro caso não exista registro
+        except KeyError as ke:
+            return { "erro": f"Falta parâmetro obrigatório {str(ke)}" }, 400
+        except AttributeError:
+            return { "erro": "Usuário não existe" }, 404
+        
+        mapper = sql.inspect(usuario)
+        for column in mapper.attrs:
+            key = column.key
+            
+            valor = req.get(key, -1)
+            if valor != -1:
+                setattr(usuario, key, valor)
+                
+        db.session.commit()
         
