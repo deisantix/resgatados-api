@@ -1,4 +1,4 @@
 from ..config.api import api
-from resgatados.controllers.usuario import Usuario
+from resgatados.controllers.usuarios import Usuarios
 
-api.add_resource(Usuario, '/usuario')
+api.add_resource(Usuarios, '/usuarios')

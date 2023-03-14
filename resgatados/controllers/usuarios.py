@@ -7,7 +7,7 @@ from sqlalchemy import exc
 
 from ..models.usuario import Usuario as UsuarioModel 
 
-class Usuario(Resource):
+class Usuarios(Resource):
     
     def get(self):
         usuarios = db.session.execute(
