@@ -25,3 +25,13 @@ class Animal(db.Model):
         nullable=False
     )
     
+    def get_json(self):
+        return {
+            "id": self.id,
+            "nome": self.nome,
+            "data_nascimento": self.data_nascimento,
+            "descricao": self.descricao,
+            "raca": self.raca,
+            "especie": self.especie
+        }
+    
