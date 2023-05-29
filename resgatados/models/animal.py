@@ -2,7 +2,9 @@ from ..database.db import db
 import sqlalchemy as sql
 import datetime
 import math
+from dataclasses import dataclass
 
+@dataclass()
 class Animal(db.Model):
     id = sql.Column(
         sql.Integer, 
