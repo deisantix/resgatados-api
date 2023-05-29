@@ -5,13 +5,22 @@ from ..database.db import db
 from sqlalchemy.orm import exc
 
 from ..models.usuario import Usuario as UsuarioModel
+from ..models.animal import Animal as AnimalModel
 
 class UsuarioPorId(Resource):
     
     def get(self, user):
         try:
             usuario = self.retornar_usuario_por_id(user)
-            return usuario.get_json()
+            usuario_json = usuario.get_json()
+            
+            if (usuario_json['tipo'] == 'D'):
+                animais_divulgados = db.session.execute(
+                    sql.select(AnimalModel).where(AnimalModel.divulgador.__eq__(usuario_json['cpf']))
+                ).scalars().all()
+                usuario_json['divulgados'] = [animal.get_json() for animal in animais_divulgados]
+            
+            return usuario_json
         except AttributeError:
             return { "erro": "Usuário não encontrado" }, 404
     
