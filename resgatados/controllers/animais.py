@@ -4,6 +4,7 @@ from flask_restful import Resource
 from flask import request
 from ..database.db import db
 from sqlalchemy import exc
+import datetime
 
 from ..models.animal import Animal as AnimalModel
 from ..models.usuario import Usuario as UsuarioModel
@@ -28,11 +29,12 @@ class Animais(Resource):
     def post(self):
         try:
             req = request.get_json()
-            print(req)
+            data_nasc_list = [int(d) for d in req['dataNascimento'].split('-')]
+            data_nasc = datetime.datetime(data_nasc_list[0], data_nasc_list[1], data_nasc_list[2])
             
             novo_animal = AnimalModel(
                 nome=req['nome'],
-                data_nascimento=req['dataNascimento'],
+                data_nascimento=data_nasc,
                 sexo=req['sexo'],
                 especie=req['especie'],
                 descricao=req['descricao'],
