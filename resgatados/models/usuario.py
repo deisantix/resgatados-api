@@ -1,6 +1,8 @@
 from ..database.db import db
 import sqlalchemy as sql
+from dataclasses import dataclass
 
+@dataclass()
 class Usuario(db.Model):
     cpf = sql.Column(
         sql.String, 

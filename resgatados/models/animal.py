@@ -1,6 +1,8 @@
 from ..database.db import db
 import sqlalchemy as sql
+from dataclasses import dataclass
 
+@dataclass()
 class Animal(db.Model):
     id = sql.Column(
         sql.Integer, 
