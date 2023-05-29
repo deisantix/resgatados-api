@@ -24,9 +24,11 @@ class Usuarios(Resource):
             
             novo_usuario = UsuarioModel(
                 cpf=req['cpf'],
+                user=req['user'],
                 nome=req['nome'],
                 email=req['email'],
                 senha=req['senha'],
+                tipo=req['tipo']
             )
             if req.get('descricao', -1) != -1:
                 novo_usuario.descricao = req['descricao']

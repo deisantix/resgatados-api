@@ -11,16 +11,24 @@ class Animal(db.Model):
         nullable=False
     )
     data_nascimento = sql.Column(
-        sql.Date,
+        sql.String,
         nullable=False
     )
     descricao = sql.Column(
         sql.String
     )
+    sexo = sql.Column(
+        sql.String,
+        nullable=False
+    )
     raca = sql.Column(
         sql.String
     )
     especie = sql.Column(
+        sql.String,
+        nullable=False
+    )
+    divulgador = sql.Column(
         sql.String,
         nullable=False
     )
@@ -32,6 +40,7 @@ class Animal(db.Model):
             "data_nascimento": self.data_nascimento,
             "descricao": self.descricao,
             "raca": self.raca,
-            "especie": self.especie
+            "especie": self.especie,
+            "divulgador": self.divulgador
         }
     

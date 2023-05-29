@@ -6,6 +6,10 @@ class Usuario(db.Model):
         sql.String, 
         primary_key=True
     )
+    user = sql.Column(
+        sql.String,
+        nullable=False
+    )
     nome = sql.Column(
         sql.String, 
         nullable=False
@@ -24,13 +28,19 @@ class Usuario(db.Model):
     endereco = sql.Column(
         sql.Text
     )
+    tipo = sql.Column(
+        sql.String,
+        nullable=False
+    )
     
     def get_json(self):
         return {
             "cpf": self.cpf,
             "nome": self.nome,
+            "user": self.user,
             "email": self.email,
             "senha": self.senha,
             "descricao": self.descricao,
-            "endereco": self.endereco
+            "endereco": self.endereco,
+            "tipo": self.tipo,
         }
